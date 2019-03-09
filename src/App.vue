@@ -36,7 +36,6 @@
         <router-view></router-view>
         <!--底部footer区域-->
         <div class="footer">
-
             <div class="foot_inner">
                 <ul class="foot_nav">
                     <li>
@@ -44,8 +43,8 @@
                             <a href="#">关注我们</a>
                         </div>
                         <ul>
-                            <li><a href="#">官方微博：@1001号烤箱</a></li>
-                            <li><a href="#">官方微信公众号：1001号烤箱</a></li>
+                            <li><a href="#">官方微博：2333</a></li>
+                            <li><a href="#">官方微信公众号：2333</a></li>
                         </ul>
                     </li>
                     <li>
