@@ -77,7 +77,7 @@
 
     .s_title {
         font-size: 18px;
-        font-family: 'Microsoft Yahei';
+
         /*font-size: 16px;*/
         font-weight: 700;
         color: #808080;
@@ -86,7 +86,7 @@
 
     .l_title {
         font-size: 16px;
-        font-family: 'Microsoft Yahei';
+
         /*font-size: 16px;*/
         font-weight: 700;
         color: #808080;
@@ -95,7 +95,6 @@
 
     .w_p1 > p {
         color: #999999;
-        font-family: 'Microsoft Yahei';
         font-size: 16px;
         text-align: left;
         margin-top: 25px;

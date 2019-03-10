@@ -152,7 +152,7 @@
 
 <style scoped>
     .blog {
-        width: 900px;
+        width: 1000px;
         margin: 0 auto;
         font-size: 18px;
 
