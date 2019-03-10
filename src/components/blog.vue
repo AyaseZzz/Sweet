@@ -73,8 +73,7 @@
         </el-table>
 
         <!-- 上面是加入js部分的 -->
-        <audio src=""
-               preload id="music" hidden></audio>
+        <audio src=""preload id="music" hidden></audio>
 
 
     </div>
