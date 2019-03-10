@@ -127,9 +127,8 @@
                     this.flag=true;
                     if(this.index!=index){
                         audio.play();
+                        this.index=index;
                     }
-
-
                 }
 
                 console.log(this.index)
