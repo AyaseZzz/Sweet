@@ -1,7 +1,9 @@
 <template>
     <div class="blog">
         <el-row>
-            <el-col :span="24"><div class="title">歌曲列表</div></el-col>
+            <el-col :span="24">
+                <div class="title">歌曲列表</div>
+            </el-col>
         </el-row>
 
         <!--<el-row :gutter="20" class="title">-->
@@ -61,7 +63,7 @@
                     prop="singer"
                     label="歌手">
             </el-table-column>
-            <el-table-column label="操作"  width="80">
+            <el-table-column label="操作" width="80">
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -73,7 +75,7 @@
         </el-table>
 
         <!-- 上面是加入js部分的 -->
-        <audio src=""preload id="music" hidden></audio>
+        <audio src="" preload id="music" hidden></audio>
 
 
     </div>
@@ -85,22 +87,32 @@
         name: "blogs",
         data() {
             return {
+                src: true,
                 count: 10,
                 start: 0,
                 height: '',
                 list: [],
-                index:0,
-                flag:true
+                index: 0,
+                flag: true,
+                status: true,
+
             }
         },
         mounted() {
-            this.list = JSON.parse(localStorage.getItem('data') || '[]');
-            this.$http.get('https://api.bzqll.com/music/netease/songList?key=579621905&id=2520739691&limit=10&offset=0').then(res => {
-                if (res.body.code === 200) {
-                    localStorage.setItem('data', JSON.stringify(res.body.data.songs));
-                    this.list = JSON.parse(localStorage.getItem('data'));
-                }
-            })
+            if (this.list.length == 0) {
+                this.$http.get('https://api.bzqll.com/music/netease/songList?key=579621905&id=608683736&limit=10&offset=0').then(res => {
+                    if (res.body.code === 200) {
+                        localStorage.setItem('data', JSON.stringify(res.body.data.songs));
+                        this.list = JSON.parse(localStorage.getItem('data'));
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            } else {
+                this.list = JSON.parse(localStorage.getItem('data'));
+            }
+
+
         },
         methods: {
             indexMethod(index) {
@@ -108,7 +120,7 @@
             },
             dateFormat: function (row, column) {
                 var date = row[column.property];
-                if (date == undefined) {
+                if (date === undefined) {
                     return "";
                 }
                 var m = parseInt(date / 60).toString().padStart(2, '0');
@@ -116,27 +128,34 @@
                 return `${m}:${s}`;
             },
             handleEdit(index, row) {
+                // console.log(this.$refs.ado);
                 var audio = document.getElementById('music');
-                audio.src = row.url;
-                if(this.flag){
+
+                if (this.flag) {
+                    if (this.src) {
+                        audio.src = row.url;
+                    }
+                    this.src = false;
                     audio.play();
-                    this.index=index;
-                    this.flag=false;
-                }else{
+                    this.index = index;
+                    this.flag = !this.flag;
+                } else {
                     audio.pause();
-                    this.flag=true;
-                    if(this.index!=index){
+                    this.flag = !this.flag;
+                    if (this.index !== index) {
+                        // audio.src = row.url;
+                        this.src = true;
+                        audio.src = row.url;
                         audio.play();
-                        this.index=index;
+                        this.index = index;
                     }
                 }
 
-                console.log(this.index)
+
+                // console.log(this.index)
 
             },
-            handleDelete(index, row) {
-                console.log(index, row);
-            }
+
         },
         filters: {
             dateFormat: function (dataStr) {
